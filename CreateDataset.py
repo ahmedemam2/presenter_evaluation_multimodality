@@ -142,7 +142,7 @@ def extracfeatures():
     pass
 
 for i in range(len(activities)):
-    for file in os.listdir("videosNew" + "/" + activities[i]):
+    for file in os.listdir("videosNew"  "/" + activities[i]):
         path = "videosNew" + '/' + activities[i] + "/" + file
         landmarks11xS = []
         landmarks11yS = []
