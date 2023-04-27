@@ -262,8 +262,8 @@ def extracfeatures():
     pass
 
 for i in range(len(activities)):
-    for file in os.listdir("test" + "/" + activities[i]):
-        path = "test" + '/' + activities[i] + "/" + file
+    for file in os.listdir("videosNew" + "/" + activities[i]):
+        path = "videosNEw" + '/' + activities[i] + "/" + file
         landmarks11xS = []
         landmarks11yS = []
         landmarks12xS = []
@@ -353,4 +353,4 @@ df = pd.DataFrame({
     'kurtosis-y16': kurtosisy16,
     'label': labellist
 })
-df.to_csv('Dataset_Features_Test.csv',index=False)
+df.to_csv('Dataset_Features_Train.csv',index=False)
