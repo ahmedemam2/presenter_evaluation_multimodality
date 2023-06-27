@@ -3,16 +3,12 @@ Evaluation of Multimodality in Presentation Delivery
 This project endeavored to quantitatively evaluate a presenter's performance by scrutinizing four integral aspects: vocal attributes, physical posture, ocular movement (eye gaze), and facial expressions.
 
 Here is a demo for the project.
-https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/ffa73eb8-5d44-4cac-97e7-0144ebfbae2b
+https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/9d7f0718-92d4-4ebe-b6bb-a931fd26acf2
 
 Libraries used:
 Mediapipe, NLTK, Keras, Sklearn, pandas, numpy.
 
 To try the system, run the python file integrate.py upload your video and you will receive a result like this, which will be saved as text file on your device.
-
-https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/9d7f0718-92d4-4ebe-b6bb-a931fd26acf2
-
-
 
 In assessing vocal attributes:
 Both voice emotion and pronunciation were taken into consideration. The Ravdess Voice Emotion Dataset served as a valuable resource for emotional evaluation. For pronunciation analysis, Google Cloud's Speech-to-Text API was employed. The resultant output was tokenized and lemmatized before the Jaccard similarity index was applied to compare the presenter's script with the actual delivery.
