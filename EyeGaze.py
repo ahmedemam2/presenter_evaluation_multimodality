@@ -64,4 +64,3 @@ def get_eye_position(path,prediction_list):
         for item in prediction_list:
             f.write("%s\n" % item)
 
-# get_eye_position("00026.tts",[])

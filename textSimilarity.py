@@ -30,8 +30,6 @@ def main(path):
 
     base_name = os.path.splitext(os.path.basename(path))[0]
     audio_file = base_name + ".wav"
-
-    # Extract audio from the video clip and write it to an audio file
     video = VideoFileClip(path)
     audio = video.audio
     audio.write_audiofile(audio_file)

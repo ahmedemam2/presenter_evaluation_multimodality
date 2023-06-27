@@ -129,4 +129,3 @@ def main(presenter_id):
     test_data = process_audioFiles(output_directory)
     main_test(test_data)
 
-# main("00019.tts")

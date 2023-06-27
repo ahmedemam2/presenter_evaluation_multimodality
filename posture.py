@@ -118,7 +118,4 @@ def test_featurebased(X_test):
             f.write("%s\n" % item)
 
 
-def main_machine(df):
-    test_featurebased(df)
-
 
