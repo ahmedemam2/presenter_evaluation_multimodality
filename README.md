@@ -9,7 +9,9 @@ Libraries used:
 Mediapipe, NLTK, Keras, Sklearn, pandas, numpy.
 
 To try the system, run the python file integrate.py upload your video and you will receive a result like this, which will be saved as text file on your device.
-![image](https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/b8c390ef-7206-4765-8685-3fe0a76dbc34)
+
+https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/9d7f0718-92d4-4ebe-b6bb-a931fd26acf2
+
 
 
 In assessing vocal attributes:
