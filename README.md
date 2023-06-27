@@ -3,7 +3,9 @@ Evaluation of Multimodality in Presentation Delivery
 This project endeavored to quantitatively evaluate a presenter's performance by scrutinizing four integral aspects: vocal attributes, physical posture, ocular movement (eye gaze), and facial expressions.
 
 Here is a demo for the project.
-https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/9d7f0718-92d4-4ebe-b6bb-a931fd26acf2
+https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/91ac5e4e-eb85-4292-b20f-169aeb40fa81
+
+
 
 Libraries used:
 Mediapipe, NLTK, Keras, Sklearn, pandas, numpy.
