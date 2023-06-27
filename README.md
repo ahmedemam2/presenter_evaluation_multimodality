@@ -3,14 +3,17 @@ Evaluation of Multimodality in Presentation Delivery
 This project endeavored to quantitatively evaluate a presenter's performance by scrutinizing four integral aspects: vocal attributes, physical posture, ocular movement (eye gaze), and facial expressions.
 
 Here is a demo for the project.
-https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/91ac5e4e-eb85-4292-b20f-169aeb40fa81
+
+
+https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/f75c6c63-9e62-4b88-9e58-bdb36b3c97e1
+
 
 
 
 Libraries used:
 Mediapipe, NLTK, Keras, Sklearn, pandas, numpy.
 
-To try the system, run the python file integrate.py upload your video and you will receive a result like this, which will be saved as text file on your device.
+To try the system, run the python file integrate.py upload your video and you will receive a result like this, which will be saved as a text file on your device.
 
 In assessing vocal attributes:
 Both voice emotion and pronunciation were taken into consideration. The Ravdess Voice Emotion Dataset served as a valuable resource for emotional evaluation. For pronunciation analysis, Google Cloud's Speech-to-Text API was employed. The resultant output was tokenized and lemmatized before the Jaccard similarity index was applied to compare the presenter's script with the actual delivery.
@@ -27,8 +30,8 @@ The DeepFace library was employed for the face emotion detection.
 Future prospects include the implementation of Convolutional Neural Networks (CNN) on a facial emotion dataset to enhance the evaluation process.
 
 Results: 
-![image](https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/ca0c8684-00b9-4524-b0ab-322723ba5b44)
+![image](https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/ea694539-f5a9-4bed-b696-9946c4c6bc2a)
 
 
-In summary, this quantitative approach allows for a comprehensive evaluation of a presenter's performance, encapsulating voice, posture, eye gaze, and facial expressions. It's worth noting, however, that the presenter's appearance, a variable not yet explored in this project, also contributes to the overall evaluation.
+In summary, this quantitative approach allows for a comprehensive evaluation of a presenter's performance, encapsulating voice, posture, eye gaze, and facial expressions. However, the presenter's appearance, a variable not yet explored in this project, also contribute to the overall evaluation.
 
