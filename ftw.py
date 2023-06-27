@@ -40,8 +40,8 @@ def create_ftw_templates(label):
     template = []
     ct=0
     print(label)
-    for filename in os.listdir('videosNew/'  label):
-        video = 'videosNew/' label  '/'  filename
+    for filename in os.listdir('videosNew/' + label):
+        video = 'videosNew/' + label + '/' + filename
         template.append(extract_landmarks_from_videos(video))
     return template
 
