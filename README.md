@@ -25,7 +25,7 @@ https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933
 Libraries used:
 Mediapipe, NLTK, Keras, Sklearn, pandas, numpy.
 
-To try the system, run the python file integrate.py after you provide the right path for your video and you will receive a result like this.
+To try the system, run the python file integrate.py upload your video and you will receive a result like this, which will be saved as text file on your device.
 ![image](https://github.com/ahmedemam2/presenter_evaluation_multimodality/assets/88343933/b8c390ef-7206-4765-8685-3fe0a76dbc34)
 
 
