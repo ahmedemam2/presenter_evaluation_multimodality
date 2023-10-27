@@ -108,7 +108,7 @@ def main_test(test_data):
     # test(X_test,class_labels,model)
     # test(X_test,class_labels,model2)
     # predictions = ensemble(model,model2,X_test,class_labels)
-    model = load_model("models/smote_bilstm_nofear.h5")
+    # model = load_model("models/smote_bilstm_nofear.h5")
     model2 = load_model("models/smote_RNN_nofear.h5")
     X_test = test_data
     class_labels = np.unique(classes)

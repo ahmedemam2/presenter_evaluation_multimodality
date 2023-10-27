@@ -3,6 +3,9 @@ from sklearn.pipeline import make_pipeline
 from keras.optimizers import Adam
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
+from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping
+
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.ensemble import VotingClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -20,50 +23,14 @@ from sklearn import metrics
 from sklearn.metrics import confusion_matrix
 from matplotlib import pyplot as plt
 
-
-def BiLSTM(data,classes):
-
-
-    # Split the data into features and labels
-    X_train = data.iloc[:, :-1].values
-    y_train = data.iloc[:, -1].values
-
-    # Reshape the input features
-    X_train = np.reshape(X_train, (X_train.shape[0], 1, X_train.shape[1]))
-
-    # One-hot encode the labels
-    y_train = np.asarray(pd.get_dummies(y_train), dtype=np.float32)
-
-    # Split the data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
-
-    # Define the model
-    model = Sequential()
-    model.add(Bidirectional(LSTM(64, return_sequences=True), input_shape=(X_train.shape[1], X_train.shape[2])))
-    model.add(Dropout(0.1))
-    model.add(Bidirectional(LSTM(128)))
-    model.add(Dropout(0.2))
-    model.add(Dense(y_train.shape[1], activation='softmax'))
-    model.add(Bidirectional(LSTM(256)))
-    model.add(Dropout(0.1))
-    model.add(Dense(y_train.shape[1], activation='softmax'))
-    optimizer = Adam(learning_rate=0.001)
-    model.compile(loss="binary_crossentropy", optimizer=optimizer, metrics=['accuracy'])
-    reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=5, min_lr=0.0001)
-
-    # Train the model
-    history = model.fit(X_train, y_train, epochs=120, batch_size=264, verbose=1, validation_data=(X_test, y_test),
-                        callbacks=[reduce_lr])
-
-    # Evaluate the model
-    score = model.evaluate(X_test, y_test, verbose=0)
-    print(f'Test loss: {score[0]} / Test accuracy: {score[1]}')
 def build_BiLSTM(data,classes):
     X_train = data.iloc[:, :-1].values
     y_train = data.iloc[:, -1].values
     X_train = np.reshape(X_train, (X_train.shape[0], 1, X_train.shape[1]))
     y_train = np.asarray(pd.get_dummies(y_train), dtype=np.float32)
     X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+    X_test, X_val, y_test, y_val = train_test_split(X_test, y_test, test_size=0.5, random_state=42)
+
     model = Sequential()
     model.add(Bidirectional(LSTM(16, return_sequences=True),
                             input_shape=(X_train.shape[1], X_train.shape[2])))
@@ -75,43 +42,17 @@ def build_BiLSTM(data,classes):
     model.compile(loss="binary_crossentropy", optimizer='adam', metrics=['accuracy'])
 
     model.summary()
-    history = model.fit(X_train, y_train, epochs=70, batch_size=1, verbose=1)
-    loss, accuracy = model.evaluate(X_test, y_test)
-    # plt.plot(history.history['accuracy'], label='train_acc')
-    # plt.plot(history.history['val_accuracy'], label='val_acc')
-    # plt.legend()
-    # plt.show()
-    classes = np.unique(y_train)
-    # Get predictions on test set
-    y_pred = model.predict(X_test)
+    early_stopping = EarlyStopping(monitor='val_loss',
+                                   patience=10)
+    history = model.fit(X_train, y_train, epochs=70, batch_size=32, verbose=1,
+                callbacks = [early_stopping],validation_data=(X_val,y_val))
 
-    y_pred_classes = np.argmax(y_pred, axis=1)
-
-    y_test_classes = np.argmax(y_test, axis=1)
-
-    # Create confusion matrix
-    cm = confusion_matrix(y_test_classes, y_pred_classes)
-
-    # Plot confusion matrix as heatmap
-    sns.heatmap(cm, annot=True, fmt='g', cmap='Blues', xticklabels=classes, yticklabels=classes)
-
-    plt.title('Confusion matrix')
-
-    plt.xlabel('Predicted')
-
-    plt.ylabel('True')
-
-    plt.show()
-    from sklearn.metrics import f1_score, accuracy_score
 def build_LSTM(data, classes, d1, d2, u1, u2):
     print("dense_1: ", d1)
     print("dense_2: ", d2)
     print("units_1: ", u1)
     print("units_2: ", u2)
 
-    from keras.layers import Reshape
-
-    # Reshape input to remove extra dimensions
     X_train = data.iloc[:, :-1].values
     y_train = data.iloc[:, -1].values
     X_train = np.reshape(X_train, (X_train.shape[0], 1, X_train.shape[1]))
@@ -173,70 +114,6 @@ def build_LSTM(data, classes, d1, d2, u1, u2):
 
     plt.show()
 
-def build_Gru(data,classes):
-
-    X_train = data.iloc[:, :-1].values
-    y_train = data.iloc[:, -1].values
-    X_train = np.reshape(X_train, (X_train.shape[0], 1, X_train.shape[1]))
-    y_train = np.asarray(pd.get_dummies(y_train), dtype=np.float32)
-    X_train, X_test, y_train, y_test = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
-    # sc = StandardScaler()
-    #
-    # X_train = sc.fit_transform(X_train)
-    # X_test = sc.transform(X_test)
-    # pca = PCA(n_components=2)
-    #
-    # X_train = pca.fit_transform(X_train)
-    # X_test = pca.transform(X_test)
-    #
-
-    # Define the model architecture
-    model = Sequential()
-    model.add(GRU(units=32, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])))
-    model.add(Dropout(0.1))
-    model.add(GRU(units=128, return_sequences=True))
-    model.add(Dropout(0.3))
-    # model.add(GRU(units=128, return_sequences=True))
-    # model.add(Dropout(0.2))
-    # model.add(GRU(units=128))
-    # model.add(Dropout(0.2))
-    model.add(Dense(units=y_train.shape[1], activation='softmax'))
-
-    # Compile the model
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-    # Train the model
-    history = model.fit(X_train, y_train, epochs=120, batch_size=64, validation_split=0.2)
-    loss, accuracy = model.evaluate(X_test, y_test)
-    print('Test set loss:', loss)
-    print('Test set accuracy:', accuracy)
-    plt.plot(history.history['loss'], label='train_loss')
-    plt.plot(history.history['val_loss'], label='val_loss')
-    plt.legend()
-    plt.show()
-
-    # Get predictions on test set
-    y_pred = model.predict(X_test)
-
-    y_pred_classes = np.argmax(y_pred, axis=1)
-
-    y_test_classes = np.argmax(y_test, axis=1)
-
-    # Create confusion matrix
-    cm = confusion_matrix(y_test_classes, y_pred_classes)
-
-    # Plot confusion matrix as heatmap
-    sns.heatmap(cm, annot=True, fmt='g', cmap='Blues', xticklabels=classes, yticklabels=classes)
-
-    plt.title('Confusion matrix')
-
-    plt.xlabel('Predicted')
-
-    plt.ylabel('True')
-
-    plt.show()
-
-
 def import_data():
     dftrain = pd.read_csv('MasscomDatasetLandmarks.csv')
     X_train = dftrain.drop('label', axis='columns')
@@ -254,9 +131,9 @@ def main():
     # mlp_accuracy(X_train,X_test,y_train,y_test)
     build_BiLSTM(data,classes)
     # build_LSTM(data,classes,0.1,0.1,64,128)
-    build_Gru(data,classes)
+    # build_Gru(data,classes)
 
-# main()
+main()
 
 dftrain = pd.read_csv('MasscomDatasettemp2.csv')
 dftest = pd.read_csv('testDataset3.csv')
@@ -340,6 +217,6 @@ def main_machine():
     data = pd.read_csv('MasscomDatasetLandmarks.csv')
     data.info()
 
-main_machine()
+# main_machine()
 
 

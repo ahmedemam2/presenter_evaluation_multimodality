@@ -63,15 +63,14 @@ def getlandmarks(frames):
         for coord, data in values.items():
             df_data[f"{stat}-{coord}S"] = data
     df = pd.DataFrame(df_data)
-    return df
+    # return df
+    # df.to_csv('overlapping_test_set.csv', index=False)
+    test_featurebased(df)
 
-    df.to_csv('overlapping_test_set.csv', index=False)
-    main_machine(df)
 
 def get_frames(path):
     cap = cv2.VideoCapture(path)
     list_frames = []
-    print(path)
     while True:
         success, frames = cap.read()
         try:
@@ -82,7 +81,7 @@ def get_frames(path):
     return list_frames
 
 def extract_frames(path):
-    # print(path)
+    print(path)
     frames = get_frames(path)
     return frames
 def main(path):
@@ -116,6 +115,7 @@ def test_featurebased(X_test):
     with open('posture.txt', 'w') as f:
         for item in results:
             f.write("%s\n" % item)
+
 
 
 
