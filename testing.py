@@ -93,22 +93,8 @@ def process_audioFiles(path):
 
 def main_test(test_data):
 
-
-    # model = load_model("models/final_bilstm85.h5")
-    # model2 = load_model("models/final_RNN84.h5")
-    # X_test = test_data
-    # sc = StandardScaler()
-    # X_test = sc.fit_transform(X_test)
-
     classes = pd.read_csv('Ravdess_standard_nofear.csv').labels
-    # class_labels = np.unique(classes)
-    # print(class_labels)
-    # model = load_model("models/smote_bilstm_nofear.h5")
-    # model2 = load_model("models/smote_RNN_nofear.h5")
-    # test(X_test,class_labels,model)
-    # test(X_test,class_labels,model2)
-    # predictions = ensemble(model,model2,X_test,class_labels)
-    # model = load_model("models/smote_bilstm_nofear.h5")
+
     model2 = load_model("models/smote_RNN_nofear.h5")
     X_test = test_data
     class_labels = np.unique(classes)
@@ -117,6 +103,7 @@ def main_test(test_data):
     test(X_test, class_labels, model2)
     # ensemble(model, model2, X_test, class_labels)
     predictions = test(X_test,class_labels,model2)
+    return predictions
     with open('voiceEmotions.txt', 'w') as f:
         for item in predictions:
             f.write("%s\n" % item)
@@ -127,5 +114,5 @@ def main(presenter_id):
     output_directory = "".join([presenter_id, "presentation"])
     cut_video_into_voice_records(video_path, output_directory)
     test_data = process_audioFiles(output_directory)
-    main_test(test_data)
+    return main_test(test_data)
 

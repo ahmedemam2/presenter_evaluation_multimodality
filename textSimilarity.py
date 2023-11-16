@@ -53,6 +53,5 @@ def main(path):
 
     similarity = calculate_similarity(paragraph1, paragraph2)
     print(f"The similarity between the paragraphs is: {similarity}")
-    with open('Pronounciation.txt', 'w') as f:
-        f.write("%s\n" % similarity)
+    return similarity
 

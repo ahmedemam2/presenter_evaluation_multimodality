@@ -65,7 +65,7 @@ def getlandmarks(frames):
     df = pd.DataFrame(df_data)
     # return df
     # df.to_csv('overlapping_test_set.csv', index=False)
-    test_featurebased(df)
+    return test_featurebased(df)
 
 
 def get_frames(path):
@@ -87,7 +87,7 @@ def extract_frames(path):
 def main(path):
     frames = extract_frames(path)
     print(len(frames))
-    getlandmarks(frames)
+    return getlandmarks(frames)
 
 
 def test_featurebased(X_test):
@@ -112,6 +112,7 @@ def test_featurebased(X_test):
                     most_frequent_string = unique_strings[most_frequent_index]
                     predictions.append(most_frequent_string)
                 w += 4
+    return predictions
     with open('posture.txt', 'w') as f:
         for item in results:
             f.write("%s\n" % item)

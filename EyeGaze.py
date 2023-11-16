@@ -52,14 +52,14 @@ def get_eye_position(path,prediction_list):
                     position = ' left'
                     flag=1
                     ctleft+=1
-                # if flag!=1:
-                #     position = 'Eye closed'
+
                 flag = 0
                 prediction_list.append(position)
 
         cv2.destroyAllWindows()
         cap.release()
         print(prediction_list)
+    return prediction_list
     with open('eyeGaze.txt', 'w') as f:
         for item in prediction_list:
             f.write("%s\n" % item)

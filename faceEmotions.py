@@ -15,7 +15,7 @@ def get_face_emotions(path,prediction_list):
         else:
             break
 
-    print(prediction_list)
+    return prediction_list
     with open('faceEmotion.txt', 'w') as f:
         for item in prediction_list:
             f.write("%s\n" % item)
